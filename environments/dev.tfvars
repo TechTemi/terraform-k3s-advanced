@@ -1,8 +1,8 @@
 # Dev environment — small, cheap, safe to experiment with
 
-project_name  = "terraform-k3s"
-environment   = "dev"
-aws_region    = "us-west-2"
+project_name = "terraform-k3s"
+environment  = "dev"
+aws_region   = "us-west-2"
 
 key_pair_name = "terraform-lab-key"
 
