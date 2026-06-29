@@ -4,7 +4,7 @@ variable "project_name" {
 }
 
 variable "environment" {
-  description = "The deployment environment (dev, staging, prod)"
+  description = "The deployment environment"
   type        = string
 }
 
@@ -23,4 +23,9 @@ variable "subnet_cidr" {
 variable "aws_region" {
   description = "AWS region used to select the availability zone"
   type        = string
+}
+
+variable "common_tags" {
+  description = "Common tags applied to networking resources"
+  type        = map(string)
 }

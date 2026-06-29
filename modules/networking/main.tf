@@ -4,11 +4,9 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
   enable_dns_support   = true
 
-  tags = {
-    Name        = "${var.project_name}-${var.environment}-vpc"
-    Environment = var.environment
-    ManagedBy   = "Terraform"
-  }
+  tags = merge(var.common_tags, {
+    Name = "${var.project_name}-${var.environment}-vpc"
+  })
 }
 
 # Public Subnet
@@ -18,22 +16,18 @@ resource "aws_subnet" "public" {
   availability_zone       = "${var.aws_region}a"
   map_public_ip_on_launch = true
 
-  tags = {
-    Name        = "${var.project_name}-${var.environment}-subnet"
-    Environment = var.environment
-    ManagedBy   = "Terraform"
-  }
+  tags = merge(var.common_tags, {
+    Name = "${var.project_name}-${var.environment}-subnet"
+  })
 }
 
 # Internet Gateway
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
-  tags = {
-    Name        = "${var.project_name}-${var.environment}-igw"
-    Environment = var.environment
-    ManagedBy   = "Terraform"
-  }
+  tags = merge(var.common_tags, {
+    Name = "${var.project_name}-${var.environment}-igw"
+  })
 }
 
 # Route Table
@@ -45,11 +39,9 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.main.id
   }
 
-  tags = {
-    Name        = "${var.project_name}-${var.environment}-rt"
-    Environment = var.environment
-    ManagedBy   = "Terraform"
-  }
+  tags = merge(var.common_tags, {
+    Name = "${var.project_name}-${var.environment}-rt"
+  })
 }
 
 # Route Table Association
@@ -104,9 +96,7 @@ resource "aws_security_group" "k3s" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name        = "${var.project_name}-${var.environment}-sg"
-    Environment = var.environment
-    ManagedBy   = "Terraform"
-  }
+  tags = merge(var.common_tags, {
+    Name = "${var.project_name}-${var.environment}-sg"
+  })
 }

@@ -39,3 +39,8 @@ variable "install_k3s" {
   type        = bool
   default     = true
 }
+
+variable "common_tags" {
+  description = "Common tags applied to compute resources"
+  type        = map(string)
+}

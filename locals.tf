@@ -1,7 +1,6 @@
 locals {
   # Use a larger instance in prod, smaller in dev.
-  # terraform.workspace is a built-in value that holds the
-  # current workspace name, for example: dev or prod.
+  # Keep t3 instead of t2 because K3s can struggle on t2.micro.
   instance_type = terraform.workspace == "prod" ? "t3.medium" : "t3.small"
 
   # Use a larger root disk in prod.
@@ -13,5 +12,6 @@ locals {
     Environment = terraform.workspace
     ManagedBy   = "Terraform"
     Week        = "Week16Lab"
+    UpdatedBy   = "GitHubActions"
   }
 }

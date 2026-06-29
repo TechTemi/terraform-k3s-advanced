@@ -59,9 +59,11 @@ resource "aws_instance" "k3s_server" {
     volume_type = "gp3"
   }
 
-  tags = {
-    Name        = "${var.project_name}-${var.environment}-server"
-    Environment = var.environment
-    ManagedBy   = "Terraform"
-  }
+  volume_tags = merge(var.common_tags, {
+    Name = "${var.project_name}-${var.environment}-root-volume"
+  })
+
+  tags = merge(var.common_tags, {
+    Name = "${var.project_name}-${var.environment}-server"
+  })
 }

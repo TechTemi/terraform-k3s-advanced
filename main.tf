@@ -36,6 +36,7 @@ module "networking" {
   aws_region   = var.aws_region
   vpc_cidr     = var.vpc_cidr
   subnet_cidr  = var.subnet_cidr
+  common_tags  = local.common_tags
 }
 
 # ── Compute Module ────────────────────────────────────────────
@@ -53,4 +54,5 @@ module "compute" {
   security_group_id = module.networking.security_group_id
   volume_size       = local.volume_size
   install_k3s       = var.install_k3s
+  common_tags       = local.common_tags
 }
